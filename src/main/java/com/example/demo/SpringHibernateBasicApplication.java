@@ -21,11 +21,19 @@ public class SpringHibernateBasicApplication {
 
 		Customer c ;
 		
+		int ucid;
+		String cname;
+		String cadd;
 		
 		Scanner sc=new Scanner(System.in);
+		
 		int i=1;
-		while(i==1) {
+		
+		while(i==1)
+		
+	{
 		System.out.println("1.Add Customer");
+		
 		System.out.println("2.show Customer");
 		System.out.println("3.Delete Customer");
 		System.out.println("4.Update Customer");
@@ -33,53 +41,89 @@ public class SpringHibernateBasicApplication {
 		System.out.println("Enter Your Choice:");
 	
 		int choice=Integer.parseInt(sc.nextLine());
-	switch(choice) {
+		
+	switch(choice)
+	{
 	case 1:
+		
 		System.out.println("Enter the Customer Name:");
-		String cname=sc.nextLine();
+		cname=sc.nextLine();
+		
 		System.out.println("Enter the Customer Address:");
-		String cadd=sc.nextLine();
+		cadd=sc.nextLine();
+		
 		c=new Customer(cname,cadd);
 		dao.saveCustomer(c);
+		
 		System.out.println("Data inserted !");
 		break;
 		
 	case 2: 
+		
 		System.out.println(":Total Customer:");
 	
 		List<Customer> list=dao.getCustomer();
-		for(Customer c1:list) {
+		
+		for(Customer c1:list) 
+		{
 			System.out.println(c1);
 		}
 		
-		
 		break;
 	case 3:
+		
 		System.out.println("Enter The Id You want to Delete :");
-		int sid=Integer.parseInt(sc.nextLine());
-			c=new Customer(sid);
+		ucid=Integer.parseInt(sc.nextLine());
+		
+			c=new Customer(ucid);
 			
 			dao.deleteCustomer(c);
+			
 		System.out.println("Data Deleted Successfully !");
 		break;
+		
 	case 4:
 		
-		/*
-		 * System.out.println("What do you want to update");
-		 * System.out.println("1.Name"); System.out.println("2.Address"); int
-		 * uch=Integer.parseInt(sc.nextLine()); if(uch==1) {
-		 * System.out.println("Enter The Id You want to Update :"); int
-		 * uid=Integer.parseInt(sc.nextLine()); System.out.println("Enter name"); String
-		 * uname=sc.nextLine(); c=new Customer(uid,uname); dao.updateCustomer(c);
-		 * System.out.println("Data updated Successfully");
-		 * 
-		 * } else if(uch==2) { System.out.println("Enter The Id You want to Update :");
-		 * int uid=Integer.parseInt(sc.nextLine()); System.out.println("Enter Address");
-		 * String uadd=sc.nextLine(); c=new Customer(); c.setC_add(uadd);
-		 * dao.updateCustomer(c); System.out.println("Data updated Successfully");
-		 * 
-		 * }
-		 */
+		System.out.println("What do you want to update");
+		System.out.println("1.Name");
+		System.out.println("2.Address");
+		int uch=Integer.parseInt(sc.nextLine());
+		
+		if(uch==1) {
+			
+			 System.out.println("Enter The Id You want to Update :"); 
+			 ucid=Integer.parseInt(sc.nextLine());
+			 
+			 System.out.println("Enter Updated Name"); 
+			 cname=sc.nextLine();
+			 
+			 Customer c1=dao.getById(ucid);
+			 c=new Customer(c1.getC_id(),cname,c1.getC_add());
+			 dao.updateCustomer(c);
+			  System.out.println("Data updated Successfully");
+		
+		}
+		else if(uch==2) {
+			
+			
+			 System.out.println("Enter The Id You want to Update :"); 
+			 ucid=Integer.parseInt(sc.nextLine());
+			 System.out.println("Enter Updated Address"); 
+			 cadd=sc.nextLine();
+			
+			 
+//			 Use this method for retriev specific id data
+			 Customer c1=dao.getById(ucid);
+			 
+			 c=new Customer(c1.getC_id(),c1.getC_name(),cadd);
+			 dao.updateCustomer(c);
+			 
+			  System.out.println("Data updated Successfully");
+		
+		}
+		
+		
+		
 		
 		break;
 		default :
