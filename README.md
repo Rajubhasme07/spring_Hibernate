@@ -1,2 +1,2 @@
 # spring_Hibernate_CRUD
-Insertion,Show,Update,Delete.
+This project aims to develop a Spring Hibernate application using Object-Relational Mapping (ORM) that performs basic CRUD
